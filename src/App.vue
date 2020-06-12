@@ -1,28 +1,44 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-app-bar app flat id="inspire">
+      <v-switch
+          v-model="$vuetify.theme.dark"
+          hide-details
+      ></v-switch>
+      <v-spacer></v-spacer>
+      <v-toolbar-title class="text-uppercase">
+        <span>Notification Platform</span>
+      </v-toolbar-title>
+    </v-app-bar>
+    <v-content>
+      <v-container fluid>
+        <div v-if="messages.length">
+          <div class="alert alert-warning" v-bind:key="index" v-for="(message, index) in messages">{{message}}</div>
+        </div>
+        <Notifications/>
+        <Notification/>
+      </v-container>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+    const Notification = () => import("./components/Notification");
+    const Notifications = () => import("./components/Notifications");
+    import {mapState} from "vuex";
+    import store from "./_store";
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    export default {
+        name: "app",
+        components: {Notification, Notifications},
+        beforeCreate() {
+            store.dispatch('updateMessages', []);
+        },
+        computed: {
+            ...mapState(['theme', 'messages'])
+        }
+    };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
