@@ -9,8 +9,8 @@ const instance = axios.create({
 instance.interceptors.response.use(response => {
     return response;
 }, error => {
-    if (error.response.status !== 201) {
-        store.dispatch('updateMessages', ['Something went wrong...']).then();
+    if (error.response.status !== 204) {
+        store.dispatch('updateMessages', [error]).then();
     }
     return Promise.reject(error);
 });

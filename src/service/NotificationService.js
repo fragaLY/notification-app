@@ -1,6 +1,5 @@
 import http from "../_helpers/http";
 import store from "../_store";
-import {helper} from '../_helpers/helper'
 
 const NOTIFICATIONS = "/api/notifications"
 
@@ -17,12 +16,12 @@ class NotificationService {
                     store.dispatch('addEvent', event).then();
                 }
             })
-            .catch(reason => store.dispatch('updateMessages', helper.messages.get(reason)).then());
+            .catch(() => store.dispatch('updateMessages', ['Notification is not created']).then());
     }
 
     update(event) {
         return http
-            .put(`${NOTIFICATIONS}`, event, {
+            .put(`${NOTIFICATIONS}/${event.notification.id}`, event, {
                 headers: {'X-CSRF-TOKEN': 'e2c96294-5a05-4dbb-b72c-87fd61eebe5e'} //todo: replace with real csrf token
             })
             .then(response => {
@@ -31,7 +30,7 @@ class NotificationService {
                     store.dispatch('updateEvent', event).then();
                 }
             })
-            .catch(reason => store.dispatch('updateMessages', helper.messages.get(reason)).then());
+            .catch(() => store.dispatch('updateMessages', ['Notification is not updated']).then());
     }
 }
 
