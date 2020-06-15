@@ -7,11 +7,11 @@ const store = new Vuex.Store({
   state: {
     theme: false,
     event: {
-      id: '',
+      key: '',
       notification: {
         id: '',
-        from: '',
-        to: ''
+        sender: '',
+        receiver: ''
       }
     },
     events: [],
@@ -37,7 +37,7 @@ const store = new Vuex.Store({
     },
     UPDATE_EVENT(state, event) {
       state.events = state.events.map(e => {
-        if (e.id === event.id && e.notification.id === event.notification.id) {
+        if (e.key === event.key && e.notification.id === event.notification.id) {
           let result = {...e, ...event};
           result.notification = event.notification;
           return result;

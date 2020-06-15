@@ -1,11 +1,11 @@
 <template>
   <v-container fluid>
     <v-card-text>
-      <v-text-field ref="event-id" v-model="event.id" label="Event Id" required autofocus clearable/>
+      <v-text-field ref="event-key" v-model="event.key" label="Event Key" required autofocus clearable/>
       <v-text-field ref="notification-id" v-model="event.notification.id" label="Notification Id" required autofocus
                     clearable/>
-      <v-text-field ref="from" v-model="event.notification.from" label="From" required clearable/>
-      <v-text-field ref="to" v-model="event.notification.to" label="To" required clearable/>
+      <v-text-field ref="sender" v-model="event.notification.sender" label="Sender" required clearable/>
+      <v-text-field ref="receiver" v-model="event.notification.receiver" label="Receiver" required clearable/>
     </v-card-text>
     <v-divider/>
     <v-card-actions>
@@ -29,11 +29,11 @@
         data: () => {
             return {
                 event: {
-                    id: '',
+                    key: '',
                     notification: {
                         id: '',
-                        from: '',
-                        to: ''
+                        sender: '',
+                        receiver: ''
                     }
                 }
             };

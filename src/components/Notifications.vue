@@ -12,10 +12,10 @@
         data: () => {
             return {
                 headers: [
-                    {text: 'Event Id', value: 'id'},
+                    {text: 'Event Key', value: 'key'},
                     {text: 'Notification Id', value: 'notification.id'},
-                    {text: 'From', value: 'notification.from'},
-                    {text: 'To', value: 'notification.to'}
+                    {text: 'Sender', value: 'notification.sender'},
+                    {text: 'Receiver', value: 'notification.receiver'}
                 ]
             };
         },
